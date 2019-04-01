@@ -53,22 +53,22 @@ namespace WindowsFormsApplication1
             listView1.Columns.AddRange(new ColumnHeader[] { ch1, ch });
             countRise.Value = 1;
             listView1.FullRowSelect = true;
-            //countRise.ThousandsSeparator = true;
-
-            //listView1.Items.Add(new ListViewItem(new string[] { "132", "456" }) );   viewitem2格以上塞入方式
-            //listView1.Items[0].SubItems[0] //取地2格以上的直
 
             outstring.Multiline = true;
-            // bg();
             SubnameFileRead();
             if (subteamName.Items.Count > 0)
                 subteamName.SelectedIndex = 0;
 
+
+            /*
+             *countRise.ThousandsSeparator = true;
+             *
+             *listView1.Items.Add(new ListViewItem(new string[] { "132", "456" }) );   viewitem2格以上塞入方式
+             *listView1.Items[0].SubItems[0] //取地2格以上的直
+             */
+
         }
 
-        private void bg()
-        {
-        }
         private void path_TextChanged(object sender, EventArgs e)
         {
 
@@ -345,32 +345,7 @@ namespace WindowsFormsApplication1
             th.Start();
             songlist.Items.Clear();
             bdylist.Clear();
-
-
-            /*
-            //送出
-            WebRequest myWebRequest = WebRequest.Create(bourn);
-
-            myWebRequest.Timeout = 10000;
-            //登陸帳號密碼的寫法
-            //myWebRequest.Credentials = new NetworkCredential("Name", "PWD", "Domain Name");
-
-            //-------------------
-            //取得網頁方式
-            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(bourn);
-            myHttpWebRequest.Timeout = 10000;
-            myHttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; Windows NT 5.2; Windows NT 6.0; Windows NT 6.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; MS-RTC LM 8; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET CLR 4.0C; .NET CLR 4.0E)";
-            myHttpWebRequest.Method = "GET";
-
-            //---------------------
-            //取得回傳
-            WebResponse myWebResponse = myHttpWebRequest.GetResponse();
-
-            Stream myStream = myWebResponse.GetResponseStream();
-            StreamReader myStreamReader = new StreamReader(myStream);
-            strHtml = myStreamReader.ReadToEnd();
-            */
-            // outstring.Text = wb.DocumentText;
+           
         }
 
         private void select()
@@ -385,8 +360,6 @@ namespace WindowsFormsApplication1
             WebRequest myWebRequest = WebRequest.Create(url);
 
             myWebRequest.Timeout = 10000;
-            //登陸帳號密碼的寫法
-            //myWebRequest.Credentials = new NetworkCredential("Name", "PWD", "Domain Name");
 
             //-------------------
             //取得網頁方式
@@ -428,22 +401,20 @@ namespace WindowsFormsApplication1
             Stream myStream = myWebResponse.GetResponseStream();
             StreamReader myStreamReader = new StreamReader(myStream);
             strHtml = myStreamReader.ReadToEnd();
-            //outstring.Text = strHtml;
+            
             CutLyric(strHtml, bdyindex);
 
         }
         private void CutLyric(string html, int bdyindex)
         {
-            //< p id = "Lyric" >...</p>
-            string lyrics = "", tempword = "";
-            int webtype = 2; //1 2=http://utaten.com
+            
+            string lyrics = "";
+            List<string> tag = new List<string>();
+            int webtype = 2; //1=search.j-lyric.net(網站已不存在) 2=http://utaten.com
             int i = 0;
-            bool flag = false;
+            bool flag = false,nolyrics=false;
             var x = new Regex(@"(\s|\S)+<div\s+class=""hopeVote""\s+>(\s|\S)+").Matches(html);
-            /*
-             * Regex.IsMatch(html, @"(\s|\S)+<div\s+class=""hopeVote""\s+>(\s|\S)+",
-                RegexOptions.IgnoreCase |RegexOptions.Singleline)||
-             */
+
             if (html.IndexOf(@"class=""hopeVote""") != -1)
             {
                 outstring.Text = "目前無歌詞";
@@ -454,52 +425,59 @@ namespace WindowsFormsApplication1
                 {
                     webtype = 1;
                     html = html.Substring(html.IndexOf("<p id=\"Lyric\">") + 13, html.Length - (html.IndexOf("<p id=\"Lyric\">") + 13)).Replace("<br>", "\r\n");
+                    for (i = 0; i < html.Length; i++)
+                    {
+
+                        if (html[i] == '>')
+                        {
+                            i++;
+                            flag = true;
+
+                        }
+                        if (html[i] == '<')
+                        {
+                            flag = false;
+                            break;
+                        }
+                        if (flag)
+                        {
+                            lyrics += html[i];
+                        }
+                    }
                 }
                 else if (html.IndexOf("<div class=\"medium\">") != -1) //webtype2
                 {
                     webtype = 2;
-                    html = html.Substring(html.IndexOf("<div class=\"medium\">") + ("<div class=\"medium\">").Length,
-                        html.Length - (html.IndexOf("<div class=\"medium\">") + ("<div class=\"medium\">").Length));
-
-                    html = html.Replace("<br />", "\r\n").Replace("          ", "").Replace("<span class=\"ruby\">", "").Replace("<span class=\"rb\">", "")
-                        .Replace("<span class=\"rt\">", "(").Replace("</span></span>", ")").Replace("</span>", "");
-                    html = html.Insert(0, ">");
+                    regset reg = new regset();
+                    html = reg.reg(html, @"(<div[ ]*class=""medium""[ ]*>[\S\s]*?<\/div>)");
+                    
+                    tag=reg.RegSet(html, @"<[ ]*div[ ]*class=""medium""[ ]*>\s*|<\/[ ]*div[ ]*>|<[ ]*span+[ ]*class=\""ruby\"">|<\/[ ]*span[ ]*>|<[ ]*span+[ ]*class=""rt""[ ]*>|<[ ]*span[ ]*class=""rb""[ ]*>");
+                    foreach(string str in tag)
+                    {
+                        if (html.IndexOf(str) != -1)
+                        {
+                            html=html.Replace(str,"");
+                        }
+                    }
+                    lyrics = html.Replace("<br />", "\r\n");
                 }
-                else if (html.IndexOf(" ") != -1)
+                else
                 {
-
+                    nolyrics = true;
                 }
-                for (i = 0; i < html.Length; i++)
-                {
-
-                    if (html[i] == '>')
-                    {
-                        i++;
-                        flag = true;
-
-                    }
-                    if (html[i] == '<')
-                    {
-                        flag = false;
-                        break;
-                    }
-                    if (flag)
-                    {
-                        lyrics += html[i];
-                    }
-                }
-                outstring.Text = "「" + bdylist[bdyindex].songName + "」\r\n 歌:" + bdylist[bdyindex].songer + "\r\n \r\n" + lyrics;
+                if (!nolyrics)
+                    outstring.Text = "「" + bdylist[bdyindex].songName + "」\r\n 歌:" + bdylist[bdyindex].songer + "\r\n \r\n" + lyrics;
+                else
+                    outstring.Text = "無歌詞";
             }
+
+            
         }
         private void wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            
             string html = "";
-            string lyrics = "http://utaten.com/search/=/sort=popular_sort%3Aasc/artist_name=/title=" + HttpUtility.UrlEncode(songNameText.Text) + "/beginning=/body=/lyricist=/composer=/sub_title=/form_open=1/show_artists=1/";
-
             songlist.Items.Clear();
-            //Thread thread = new Thread(new ThreadStart(wbloaded));
-            //thread.Start();
-            //outstring.Text = wb.DocumentText;
             html = wb.DocumentText;
             bdylist = cuthtml(html);
             this.Invoke(this.Dis, new object[] { 1, "" });
@@ -579,7 +557,7 @@ namespace WindowsFormsApplication1
                             songName = reg.reg(songName, @"\S[\W\S]*\S"); //正規式刪除前後空白()
                             html = html.Substring(html.IndexOf(songName), html.Length - html.IndexOf(songName));
 
-                            i = html.IndexOf(songName); //用index 一個一個html 慢慢抓出來
+                            i = html.IndexOf(songName); //用index 直接抓一段出來
                             songer = cutsongerword(html, i, 2);//抓歌名
 
                         }
@@ -667,7 +645,6 @@ namespace WindowsFormsApplication1
                     }
                     else
                         songer = "";
-                    //break;
                 }
 
                 if (type2cutword && webtype == 2 && html[count] == '>')
@@ -697,7 +674,6 @@ namespace WindowsFormsApplication1
         {
             string songName = "";
             bool flag = false;
-            //System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(@"\r[\s]+\w+[\s]+");
             for (; count < html.Count(); count++)
             {
                 if (html[count] == '>' && !flag)
@@ -708,7 +684,7 @@ namespace WindowsFormsApplication1
                 else if (html[count] == '<' && flag)
                 {
                     flag = false;
-                    if (songName != "New!!" && System.Text.RegularExpressions.Regex.IsMatch(songName, @"\s+\W+\s+"))
+                    if (songName != "New!!" && Regex.IsMatch(songName, @"\s+\W+\s+"))
                     {
                         break;
                     }
@@ -831,7 +807,21 @@ namespace WindowsFormsApplication1
             }
             return href;
         }
+
+        public List<string> RegSet(string href, string pax)
+        {
+            List<string> Setlist = new List<string>();
+            Regex testreg = new Regex(pax);
+            MatchCollection regsee = testreg.Matches(href);
+            foreach (Match x in regsee)
+            {
+                Setlist.Add(x.Groups[0].Value);
+            }
+            return Setlist;
+        }
     }
+
+
     public class hrefcatch
     {
         /// <summary>
@@ -850,9 +840,7 @@ namespace WindowsFormsApplication1
                 break;
             }
             return href;
-            /*
-             * https://regexr.com/ 正規式測試網頁
-             */
+
         }
         /// <summary>
         /// 抓html string內所有網址
@@ -872,9 +860,6 @@ namespace WindowsFormsApplication1
                 count++;
             }
             return returnString;
-            /*
-             * https://regexr.com/ 正規式測試網頁
-             */
         }
 
         /// <summary>
@@ -896,9 +881,10 @@ namespace WindowsFormsApplication1
                 break;
             }
             return returnString;
-            /*
-             * https://regexr.com/ 正規式測試網頁
-             */
         }
+
+        /*
+         * https://regexr.com/ 正規式測試網頁
+         */
     }
 }
