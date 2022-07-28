@@ -43,6 +43,7 @@
             this.down = new System.Windows.Forms.Button();
             this.tb3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SpaceCheckbox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.songlist = new System.Windows.Forms.ListView();
             this.song = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -65,7 +66,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.novel_dl = new System.Windows.Forms.Button();
             this.novel_link = new System.Windows.Forms.TextBox();
-            this.SpaceCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.countRise)).BeginInit();
             this.tb3.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -104,6 +104,7 @@
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
             this.listView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView1_ItemSelectionChanged);
             // 
             // columnHeader1
@@ -252,6 +253,17 @@
             this.tabPage1.Size = new System.Drawing.Size(1106, 596);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ReName";
+            // 
+            // SpaceCheckbox
+            // 
+            this.SpaceCheckbox.AutoSize = true;
+            this.SpaceCheckbox.Location = new System.Drawing.Point(634, 103);
+            this.SpaceCheckbox.Name = "SpaceCheckbox";
+            this.SpaceCheckbox.Size = new System.Drawing.Size(107, 16);
+            this.SpaceCheckbox.TabIndex = 16;
+            this.SpaceCheckbox.Text = "取消空白鍵和[ ]";
+            this.SpaceCheckbox.UseVisualStyleBackColor = true;
+            this.SpaceCheckbox.CheckedChanged += new System.EventHandler(this.SpaceCheckbox_CheckedChanged);
             // 
             // tabPage2
             // 
@@ -483,16 +495,6 @@
             this.novel_link.Size = new System.Drawing.Size(425, 22);
             this.novel_link.TabIndex = 0;
             this.novel_link.TextChanged += new System.EventHandler(this.novel_link_TextChanged);
-            // 
-            // SpaceCheckbox
-            // 
-            this.SpaceCheckbox.AutoSize = true;
-            this.SpaceCheckbox.Location = new System.Drawing.Point(634, 103);
-            this.SpaceCheckbox.Name = "SpaceCheckbox";
-            this.SpaceCheckbox.Size = new System.Drawing.Size(107, 16);
-            this.SpaceCheckbox.TabIndex = 16;
-            this.SpaceCheckbox.Text = "取消空白鍵和[ ]";
-            this.SpaceCheckbox.UseVisualStyleBackColor = true;
             // 
             // Rename
             // 
