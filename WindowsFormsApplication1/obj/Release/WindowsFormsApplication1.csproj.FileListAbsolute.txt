@@ -42,3 +42,17 @@ Y:\程式相關\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.pdb
 Y:\程式相關\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.Form1.resources
 Y:\程式相關\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.Rename.resources
 Y:\程式相關\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.wbdL.resources
+D:\C#\ReName\WindowsFormsApplication1\bin\Release\ReName.exe.config
+D:\C#\ReName\WindowsFormsApplication1\bin\Release\ReName.exe
+D:\C#\ReName\WindowsFormsApplication1\bin\Release\ReName.pdb
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.AssemblyReference.cache
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.SuggestedBindingRedirects.cache
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.ResolveComReference.cache
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.Form1.resources
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.Properties.Resources.resources
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.Rename.resources
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.wbdL.resources
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.cache
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.CoreCompileInputs.cache
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.exe
+D:\C#\ReName\WindowsFormsApplication1\obj\Release\ReName.pdb

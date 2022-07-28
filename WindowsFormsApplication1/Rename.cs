@@ -193,7 +193,7 @@ namespace ReName
                         }
                         else
                         {
-                            listView1.Items[i].Text = animeName.Text + "_" + count.ToString("D2") + " _" + subteamName.Text+
+                            listView1.Items[i].Text = animeName.Text + "_" + count.ToString("D2") + "_" + subteamName.Text+
                             listView1.Items[i].SubItems[2].Text;
                         }
                         listView1.Items[i].SubItems[0].BackColor = Color.LightBlue;
