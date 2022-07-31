@@ -152,6 +152,11 @@
             // countRise
             // 
             this.countRise.Location = new System.Drawing.Point(579, 100);
+            this.countRise.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.countRise.Name = "countRise";
             this.countRise.Size = new System.Drawing.Size(39, 22);
             this.countRise.TabIndex = 5;
