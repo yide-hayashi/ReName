@@ -177,6 +177,9 @@ namespace ReName
         {
 
         }
+        /// <summary>
+        /// 顯示rename後的名稱
+        /// </summary>
         private void RenameDusplay()
         {
             if (subteamName.Text != "" && animeName.Text != "")
