@@ -131,3 +131,5 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+.vs/WindowsFormsApplication1/FileContentIndex/*
+WindowsFormsApplication1/Resources/*
