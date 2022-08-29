@@ -47,6 +47,8 @@ namespace ReName
             // to the ListView control.
             lvwColumnSorter = new ListViewColumnSorter();
             this.listView1.ListViewItemSorter = lvwColumnSorter;
+            HtmlCannelRB.Hide();
+           
         }
 
         private void Rename_Load(object sender, EventArgs e)

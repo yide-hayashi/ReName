@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 /*ver 1.0.1*/
-namespace WpfApp1bot
+namespace ReName
 {
     public class regset
     {
