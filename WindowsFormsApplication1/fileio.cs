@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
-
+//origin ver at 20170703
+//ver 1.2 at 20220724
 namespace mainWin
 {
     class fileio
@@ -165,6 +166,19 @@ namespace mainWin
         /// <summary>
         /// 建立檔案(UTF-8編碼)
         /// </summary>
+        /// <param name="text">內容</param>
+        /// <param name="pathstr">資料夾位址+檔案名稱(包括副檔名)</param>
+        public void fileDataCreatUTF8(string text, string pathstr)
+        {
+            using (StreamWriter fs = File.CreateText(pathstr))
+            {
+                fs.WriteLine(text);
+                fs.Close();
+            }
+        }
+        /// <summary>
+        /// 建立檔案(UTF-8編碼)
+        /// </summary>
         /// <param name="text">內容(字串陣列格式 一列一行)</param>
         /// <param name="pathstr">資料夾位址</param>
         /// <param name="FileName">檔案名稱(包括副檔名)</param>
@@ -178,6 +192,40 @@ namespace mainWin
                 {
                     fs.WriteLine(text[i]);
                     i++;
+                }
+                fs.Close();
+            }
+        }
+        /// <summary>
+        /// 建立檔案(UTF-8編碼)
+        /// </summary>
+        /// <param name="text">內容(字串陣列格式 一列一行)</param>
+        /// <param name="pathstr">資料夾位址</param>
+        /// <param name="FileName">檔案名稱(包括副檔名)</param>
+        public void fileDataCreatUTF8(List<string> text, string pathstr, string FileName)
+        {
+            string strSub = System.IO.Path.Combine(pathstr, FileName);
+            using (StreamWriter fs = File.CreateText(strSub))
+            {
+                foreach(var i in text)
+                {
+                    fs.WriteLine(i);
+                }
+                fs.Close();
+            }
+        }
+        /// <summary>
+        /// 建立檔案(UTF-8編碼)
+        /// </summary>
+        /// <param name="text">內容(List<string>格式 一個string一行 但裡面有/r/n就會換行)</param>
+        /// <param name="pathstr_FileName">資料夾位址+檔案名稱(包括副檔名)</param>
+        public void fileDataCreatUTF8(List<string> text, string pathstr_FileName)
+        {
+            using (StreamWriter fs = File.CreateText(pathstr_FileName))
+            {
+                foreach (var i in text)
+                {
+                    fs.WriteLine(i);
                 }
                 fs.Close();
             }

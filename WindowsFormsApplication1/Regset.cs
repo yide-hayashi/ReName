@@ -5,7 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ReName
+/*ver 1.0.1*/
+namespace WpfApp1bot
 {
     public class regset
     {
@@ -39,7 +40,8 @@ namespace ReName
             MatchCollection regsee = testreg.Matches(href);
             foreach (Match x in regsee)
             {
-                Setlist.Add(x.Groups[0].Value);
+                if(x.Groups[0].Value!="")
+                    Setlist.Add(x.Groups[0].Value);
             }
             return Setlist;
         }
