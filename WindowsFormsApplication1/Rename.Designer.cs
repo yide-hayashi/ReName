@@ -237,7 +237,6 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage1.BackgroundImage = global::ReName.Properties.Resources._003;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabPage1.Controls.Add(this.SpaceCheckbox);
             this.tabPage1.Controls.Add(this.listView1);
@@ -272,7 +271,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackgroundImage = global::ReName.Properties.Resources.tw_head_01;
             this.tabPage2.Controls.Add(this.songlist);
             this.tabPage2.Controls.Add(this.outstring);
             this.tabPage2.Controls.Add(this.compate);
@@ -421,7 +419,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.BackgroundImage = global::ReName.Properties.Resources.天音かなたtest;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tabPage3.Controls.Add(this.DLstate);
             this.tabPage3.Controls.Add(this.pathbtu);
@@ -505,7 +502,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::ReName.Properties.Resources._14_1920x1080;
             this.ClientSize = new System.Drawing.Size(1094, 608);
             this.Controls.Add(this.tb3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
